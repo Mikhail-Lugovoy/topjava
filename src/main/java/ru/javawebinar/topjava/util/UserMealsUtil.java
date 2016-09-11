@@ -3,9 +3,11 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +31,34 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with correctly exceeded field
-        return null;
+        List<UserMealWithExceed> exceedList = new ArrayList<>();
+        int scoreCalories;
+        LocalDate day = null;
+        boolean exceed = false;
+        for (int i = 0; i < mealList.size(); i++) {
+            if (mealList.get(i).getDateTime().toLocalDate() != day) {
+                day = mealList.get(i).getDateTime().toLocalDate();
+                scoreCalories = 0;
+                for (int j = 0; j < mealList.size(); j++){
+                    if (mealList.get(j).getDateTime().toLocalDate().equals(day)){
+                        scoreCalories += mealList.get(j).getCalories();
+                    }
+                }
+                if (scoreCalories > caloriesPerDay)
+                    exceed = true;
+            }
+            if (mealList.get(i).getDateTime().getHour() > startTime.getHour() && mealList.get(i).getDateTime().getHour() < endTime.getHour()){
+                exceedList.add(new UserMealWithExceed(mealList.get(i).getDateTime(), mealList.get(i).getDescription(), mealList.get(i).getCalories(), exceed));
+            }
+
+
+        }
+
+        //fot test
+        for (int i = 0; i < exceedList.size(); i++) {
+            System.out.println(exceedList.get(i).getDateTime() + " " + exceedList.get(i).getDescription() + " " + exceedList.get(i).getCalories() + " " + exceedList.get(i).isExceed());
+        }
+
+        return exceedList;
     }
 }

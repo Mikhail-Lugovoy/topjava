@@ -21,7 +21,7 @@ public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("redirect to mealList");
 
-        List<MealWithExceed> list = MealsUtil.mealWithExceed(MealsUtil.meals);
+        List<MealWithExceed> list = MealsUtil.mealWithExceed(MealsUtil.meals, 2000);
 
         request.setAttribute("meals", list);
 

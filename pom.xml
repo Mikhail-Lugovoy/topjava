@@ -75,6 +75,14 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <!--DateTime formatted-->
+        <dependency>
+            <groupId>net.sargue</groupId>
+            <artifactId>java-time-jsptags</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>

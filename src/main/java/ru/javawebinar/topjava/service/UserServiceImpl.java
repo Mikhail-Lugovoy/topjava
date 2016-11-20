@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,26 +20,36 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
 
+    @Override
     public User save(User user) {
         return repository.save(user);
     }
 
+    @Override
     public void delete(int id) {
         ExceptionUtil.checkNotFoundWithId(repository.delete(id), id);
     }
 
+    @Override
     public User get(int id) throws NotFoundException {
         return ExceptionUtil.checkNotFoundWithId(repository.get(id), id);
     }
 
+    @Override
     public User getByEmail(String email) throws NotFoundException {
         return ExceptionUtil.checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
+//    public Collection<User> getAll() {
+//        return repository.getAll();
+//    }
+
+    @Override
     public List<User> getAll() {
         return repository.getAll();
     }
 
+    @Override
     public void update(User user) {
         repository.save(user);
     }

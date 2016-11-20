@@ -6,6 +6,8 @@
 <head>
     <title>Meal list</title>
 
+    <link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
 <section>
@@ -28,6 +30,7 @@
             <dt>To Time:</dt>
             <dd><input type="time" name="endTime" value="${endTime}"></dd>
         </dl>
+        <button type="submit">Filter</button>
     </form>
 
     <a href="meals?action=create">Add Meal</a>

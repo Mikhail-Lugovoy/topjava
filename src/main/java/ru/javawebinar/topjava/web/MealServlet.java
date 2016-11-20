@@ -65,6 +65,10 @@ public class MealServlet extends HttpServlet {
                 mealController.update(meal, getId(request));
             }
 
+            request.setAttribute("mealList", mealController.getAll());
+            request.getRequestDispatcher("/mealList.jsp").forward(request, response);
+
+
         } else if ("filter".equals(action)){
             LocalDate startDate = TimeUtil.parseLocalDate(resetParam("startDate", request));
             LocalDate endDate = TimeUtil.parseLocalDate(resetParam("endDate", request));
